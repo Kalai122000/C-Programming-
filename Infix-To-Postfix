@@ -1,3 +1,16 @@
+RULES:
+
+1. Priority Check
+Exponent (^) --> Highest Priority
+* , / --> Next Priority
++ , -  --> Lowest Priority
+
+2. No two operator of same priority cannot stay together into the stack;
+3. Lowest priority cannot be placed before highest priority;
+4. ( ) , [],{} - Pop all the operators inbetween this backets;
+
+========================================================================================================
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
