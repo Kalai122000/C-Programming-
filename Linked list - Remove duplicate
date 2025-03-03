@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* next;
+};
+void insertEnd(struct Node** head, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+    
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+    
+    struct Node* temp = *head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+}
+void removeDuplicates(struct Node* head) {
+    struct Node* current = head;
+    struct Node* nextNext;
+    
+    if (current == NULL) {
+        return;
+    }
+    
+    while (current->next != NULL) {
+        if (current->data == current->next->data) {
+            nextNext = current->next->next;
+            free(current->next);
+            current->next = nextNext;
+        } else {
+            current = current->next;
+        }
+    }
+}
+void display(struct Node* head) {
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    struct Node* head = NULL;
+    int n, value;
+
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &value);
+        insertEnd(&head, value);
+    }
+    
+    printf("Original List: ");
+    display(head);
+    
+    removeDuplicates(head);
+    
+    printf("List after removing duplicates: ");
+    display(head);
+    
+    return 0;
+}
